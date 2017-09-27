@@ -12,15 +12,13 @@ import {
 
 const LeftBar = () => (
   <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/dashboard-one">Dashboard One</Link></li>
-        <li><Link to="/dashboard-two">Dashboard Two</Link></li>
+    <div className="pure-menu pure-menu-horizontal">
+      <ul className="pure-menu-list">
+        <li className="pure-menu-item"><Link className="pure-menu-link" to="/">Home</Link></li>
+        <li className="pure-menu-item"><Link className="pure-menu-link" to="/dashboard-one">Dashboard One</Link></li>
+        <li className="pure-menu-item"><Link className="pure-menu-link" to="/dashboard-two">Dashboard Two</Link></li>
       </ul>
-
       <hr/>
-
       <Route exact path="/" component={DashboardZero}/>
       <Route path="/dashboard-one" component={DashboardOne}/>
       <Route path="/dashboard-two" component={DashboardTwo}/>
