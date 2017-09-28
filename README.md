@@ -1,15 +1,3 @@
-
-
-bp2 I do not think is correct as it makes everything inside navbar...
-What we want is a Navbar with a menu that is not coupled ?
-
-bp2 is an experiment
-bp1 is correct
-
-so you probably want to branch off of bp1 and **NOT** bp2
-
----
-
 react, redux and d3 functionality implemented using
 [create-react-app](https://github.com/facebookincubator/create-react-app)
 
