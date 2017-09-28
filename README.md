@@ -8,6 +8,8 @@ bp1 is correct
 
 so you probably want to branch off of bp1 and **NOT** bp2
 
+---
+
 react, redux and d3 functionality implemented using
 [create-react-app](https://github.com/facebookincubator/create-react-app)
 
