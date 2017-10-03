@@ -4,7 +4,7 @@ class DashboardOne extends React.Component {
   render() {
     return (
       <div>
-        Another dashboard
+        Dashboard One
       </div>
     )
   }
