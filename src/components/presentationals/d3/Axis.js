@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import {select} from 'd3-selection'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -19,7 +20,7 @@ class Axis extends React.Component {
     const { axis } = this.props
 
     let node = this.refs.axis
-    d3.select(node).call(axis)
+    select(node).call(axis)
   }
 
   render() {
