@@ -1,4 +1,6 @@
-import * as d3 from 'd3'
+import {rgb} from 'd3-color'
+import {arc} from 'd3-shape'
+import {interpolate} from 'd3-interpolate'
 import {select} from 'd3-selection'
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -18,7 +20,7 @@ class ProgressChart extends React.Component {
     const transform = 'translate(' + width / 2 + ',' + height / 2 + ')'
 
     const style2 = { filter: 'url(#inset-shadow2)' }
-    const arcLine = d3.arc()
+    const arcLine = arc()
         .innerRadius(innerRadius)
         .outerRadius(outerRadius)
         .cornerRadius(10)
@@ -42,10 +44,10 @@ class ProgressChart extends React.Component {
         .transition().duration(2000)
           .attrTween('d', d => {
             let endAngle = (2 * Math.PI) * d.percent
-            let interpolate = d3.interpolate({ endAngle: this.currentPercent }, { endAngle: endAngle })
+            let pcinterpolate = interpolate({ endAngle: this.currentPercent }, { endAngle: endAngle })
             this.currentPercent = endAngle
             return function (t) {
-              return arcLine(interpolate(t))
+              return arcLine(pcinterpolate(t))
             }
           })
   }
@@ -59,7 +61,7 @@ class ProgressChart extends React.Component {
     const outerRadius = (height / 2) - 10
     const innerRadius = outerRadius - 20
 
-    const arc = d3.arc()
+    const pcarc = arc()
         .innerRadius(innerRadius)
         .outerRadius(outerRadius)
         .startAngle(0)
@@ -72,10 +74,10 @@ class ProgressChart extends React.Component {
               <InsetShadow chartId="inset-shadow1" stdDeviation="15" floodColor="black" floodOpacity=".5"/>
               <InsetShadow chartId="inset-shadow2" stdDeviation="15" floodColor="white" floodOpacity=".8"/>
               <circle r={innerRadius} cx="0" cy="0" fill={data[0].color[2]} fillOpacity="0.5"/>
-              <text textAnchor="middle" dy="15" dx="5" fill={d3.rgb(data[0].color[1]).brighter(2)} style={styleText}>
+              <text textAnchor="middle" dy="15" dx="5" fill={rgb(data[0].color[1]).brighter(2)} style={styleText}>
                 {Math.floor(data[0].percent * 100) + '%'}
               </text>
-              <path className="backgroundProgress" fill={data[0].color[0]} d={arc()} style={style1}/>
+              <path className="backgroundProgress" fill={data[0].color[0]} d={pcarc()} style={style1}/>
             </g>
           </svg>
         </div>
