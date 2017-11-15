@@ -1,5 +1,6 @@
-import * as d3 from 'd3'
+import {interpolate} from 'd3-interpolate'
 import {select} from 'd3-selection'
+import {arc} from 'd3-shape'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -17,7 +18,7 @@ class DonutChartPath extends React.Component {
     const legendDisplayed = (width <= (height + 180)) ? 0 : width / 5
     const transform = 'translate(' + ((width / 2) - legendDisplayed) + ',' + (height / 2) + ')'
 
-    const arc = d3.arc().outerRadius(outerRadius).innerRadius(innerRadius)
+    const dcparc = arc().outerRadius(outerRadius).innerRadius(innerRadius)
 
     let layout = select(this.refs.DonutChartPath)
       .attr('transform', transform)
@@ -33,10 +34,10 @@ class DonutChartPath extends React.Component {
       .merge(path)
         .transition().duration(2000)
           .attrTween('d', d => {
-            let interpolate = d3.interpolate(this.currentData[d.data.name], d)
+            let dcpinterpolate = interpolate(this.currentData[d.data.name], d)
             this.currentData[d.data.name] = d
             return function (t) {
-              return arc(interpolate(t))
+              return dcparc(dcpinterpolate(t))
             }
           })
   }
