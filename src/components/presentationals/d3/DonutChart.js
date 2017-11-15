@@ -1,4 +1,4 @@
-import * as d3 from 'd3'
+import {pie} from 'd3-shape'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -6,7 +6,7 @@ import DonutChartPath from './DonutChartPath'
 import DonutChartLegend from './DonutChartLegend'
 
 const DonutChart = ({ chartId, width, height, data }) => {
-  const pie = d3.pie()
+  const dcpie = pie()
     .value(d => d.count)
     .padAngle(0.04)
     .sort(null)
@@ -21,10 +21,10 @@ const DonutChart = ({ chartId, width, height, data }) => {
         <DonutChartPath
           width={width}
           height={height}
-          pie={pie}
+          pie={dcpie}
           data={data}/>
         <DonutChartLegend
-          pie={pie}
+          pie={dcpie}
           data={data}
           width={width}
           height={height}/>
