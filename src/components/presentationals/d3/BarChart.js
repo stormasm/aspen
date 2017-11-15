@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import {scaleLinear} from 'd3-scale'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -16,7 +17,7 @@ class BarChart extends React.Component {
       }))
       .rangeRound([0, width])
       .padding(0.5)
-    const y = d3.scaleLinear()
+    const y = scaleLinear()
       .domain([0, 100])
       .rangeRound([height, 0])
 

@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import {scaleLinear} from 'd3-scale'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -76,7 +77,7 @@ class Sparkline extends React.Component {
         return d.date
       }))
       .rangeRound([0, w])
-    const y = d3.scaleLinear()
+    const y = scaleLinear()
       .domain([0, d3.max(data, function(d) {
         return d.count + 100
       })])
