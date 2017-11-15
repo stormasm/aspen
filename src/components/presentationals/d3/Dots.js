@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as d3 from 'd3'
+import {timeFormat} from 'd3-time-format'
 
 const Dots = ({ data, x, y, showTooltip, hideTooltip }) => {
   // Copy data in a new array
@@ -10,7 +10,7 @@ const Dots = ({ data, x, y, showTooltip, hideTooltip }) => {
   newData.shift()
   newData.pop()
 
-  const parser = d3.timeFormat('%B %d, %Y')
+  const parser = timeFormat('%B %d, %Y')
 
   const circles = newData.map((d, i) => {
     return (
