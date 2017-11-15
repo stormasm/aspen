@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import {scaleLinear} from 'd3-scale'
+import {select} from 'd3-selection'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -32,7 +33,7 @@ class Sparkline extends React.Component {
     let init = false
     const { line } = this.getSparklineInfos(width, height, data)
 
-    let path = d3.select(this.refs.pathSparkline).data([data])
+    let path = select(this.refs.pathSparkline).data([data])
 
     // Avoid complete redraw when resizing
     let dataEqual = JSON.stringify(data) === JSON.stringify(prevProps.data)

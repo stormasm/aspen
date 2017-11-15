@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import * as d3 from 'd3'
+import {select} from 'd3-selection'
 
 class Grid extends React.Component {
   constructor() {
@@ -19,7 +19,7 @@ class Grid extends React.Component {
     const { grid } = this.props
 
     let node = this.refs.grid
-    d3.select(node).call(grid)
+    select(node).call(grid)
   }
 
   render() {

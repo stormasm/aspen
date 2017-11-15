@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import {select} from 'd3-selection'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -18,7 +19,7 @@ class DonutChartPath extends React.Component {
 
     const arc = d3.arc().outerRadius(outerRadius).innerRadius(innerRadius)
 
-    let layout = d3.select(this.refs.DonutChartPath)
+    let layout = select(this.refs.DonutChartPath)
       .attr('transform', transform)
 
     let path = layout.selectAll('path').data(pie(data))

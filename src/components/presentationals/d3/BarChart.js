@@ -1,5 +1,5 @@
-import * as d3 from 'd3'
-import {scaleLinear} from 'd3-scale'
+import {scaleBand, scaleLinear} from 'd3-scale'
+import {select} from 'd3-selection'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -11,7 +11,7 @@ class BarChart extends React.Component {
       h = height - (margin.top + margin.bottom)
     const transform = 'translate(' + margin.left + ',' + margin.top + ')'
 
-    const x = d3.scaleBand()
+    const x = scaleBand()
       .domain(data.map(d => {
         return d.month
       }))
@@ -22,7 +22,7 @@ class BarChart extends React.Component {
       .rangeRound([height, 0])
 
     // Select main SVG
-    let svg = d3.select(this.refs.BarChart)
+    let svg = select(this.refs.BarChart)
 
     let layout = svg
       .select('g')

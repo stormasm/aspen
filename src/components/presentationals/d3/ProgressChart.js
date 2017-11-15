@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import {select} from 'd3-selection'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -23,7 +24,7 @@ class ProgressChart extends React.Component {
         .cornerRadius(10)
         .startAngle(-0.05)
 
-    let svg = d3.select(this.refs.ProgressChart)
+    let svg = select(this.refs.ProgressChart)
 
     let layout = svg
       .select('g')
