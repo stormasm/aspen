@@ -35,7 +35,7 @@ class Sparkline extends React.Component {
     const { width, height, data } = this.props
 
     let init = false
-    const { line } = this.getSparklineInfos(width, height, data)
+    const { slineInfo } = this.getSparklineInfos(width, height, data)
 
     let path = select(this.refs.pathSparkline).data([data])
 
@@ -44,7 +44,7 @@ class Sparkline extends React.Component {
     if (dataEqual) {
       if (prevProps.width && width !== prevProps.width) {
         // Resizing
-        path.attr('d', line)
+        path.attr('d', slineInfo)
         return
       } else if (!prevProps.width) {
         // Init
@@ -58,7 +58,7 @@ class Sparkline extends React.Component {
 
     path.enter().append('path').classed('sparkline', true)
       .merge(path)
-        .attr('d', line)
+        .attr('d', slineInfo)
         .attr('stroke-dasharray', function() { return this.getTotalLength() })
         .attr('stroke-dashoffset', function() { return this.getTotalLength() })
         .transition().duration(2000)
@@ -87,7 +87,7 @@ class Sparkline extends React.Component {
         return d.count + 100
       })])
       .range([h, 0])
-    const line = d3.line()
+    const slineInfo = d3.line()
       .x(function (d) {
         return x(d.date)
       })
@@ -96,7 +96,7 @@ class Sparkline extends React.Component {
       })
       .curve(curveCatmullRom.alpha(0.5))
 
-    return { h, x, y, w, line, transform }
+    return { h, x, y, w, slineInfo, transform }
   }
   showTooltip(e) {
     e.target.setAttribute('fill', '#FFFFFF')
