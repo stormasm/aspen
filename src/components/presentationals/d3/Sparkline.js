@@ -1,6 +1,10 @@
 import * as d3 from 'd3'
-import {scaleLinear} from 'd3-scale'
+import {extent, max} from 'd3-array'
+import {axisBottom, axisLeft} from 'd3-axis'
+import {scaleLinear, scaleTime} from 'd3-scale'
+import {timeParse} from 'd3-time-format'
 import {select} from 'd3-selection'
+import {curveCatmullRom} from 'd3-shape'
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -73,13 +77,13 @@ class Sparkline extends React.Component {
 
     const transform = 'translate(' + margin.left + ',' + margin.top + ')'
 
-    const x = d3.scaleTime()
-      .domain(d3.extent(data, function (d) {
+    const x = scaleTime()
+      .domain(extent(data, function (d) {
         return d.date
       }))
       .rangeRound([0, w])
     const y = scaleLinear()
-      .domain([0, d3.max(data, function(d) {
+      .domain([0, max(data, function(d) {
         return d.count + 100
       })])
       .range([h, 0])
@@ -90,7 +94,7 @@ class Sparkline extends React.Component {
       .y(function (d) {
         return y(d.count)
       })
-      .curve(d3.curveCatmullRom.alpha(0.5))
+      .curve(curveCatmullRom.alpha(0.5))
 
     return { h, x, y, w, line, transform }
   }
@@ -127,17 +131,17 @@ class Sparkline extends React.Component {
     const { tooltip } = this.state
 
     // Parse the dates
-    const parseDate = d3.timeParse('%m-%d-%Y')
+    const parseDate = timeParse('%m-%d-%Y')
     data.forEach(d => d.date = parseDate(d.day))
 
     const { h, x, y, w, transform } = this.getSparklineInfos(width, height, data)
 
-    const xAxis = d3.axisBottom(x)
+    const xAxis = axisBottom(x)
       .tickValues(data.map((d, i) => i > 0 ? d.date : null).splice(1))
       .ticks(5)
-    const yAxis = d3.axisLeft(y)
+    const yAxis = axisLeft(y)
       .ticks(5)
-    const yGrid = d3.axisLeft(y)
+    const yGrid = axisLeft(y)
       .ticks(5)
       .tickSizeInner(-w)
       .tickFormat('')
